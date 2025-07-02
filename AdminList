@@ -1,0 +1,6 @@
+local a = {
+  "China_Sukuna5",
+  "China_Sukuna"
+}
+
+retrun a
