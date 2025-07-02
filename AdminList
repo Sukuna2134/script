@@ -3,4 +3,4 @@ local a = {
   "China_Sukuna"
 }
 
-retrun a
+return a
