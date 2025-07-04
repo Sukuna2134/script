@@ -1,2 +1,2 @@
-local a = "\n\n25.7.5更新内容\n修复Fisch和种植花园 优化改进俄亥俄州"
+local a = "25.7.5修复Fisch和种植花园 优化改进俄亥俄州"
 return a
