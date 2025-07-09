@@ -1,5 +1,5 @@
 local webhook = {}
-function webhook.send(title,webhook)  
+function webhook.send(Title,Webhook)  
   local player = game:GetService("Players").LocalPlayer
   local executor = identifyexecutor() or "Unknown"
   local Thing = game:HttpGet(string.format("https://thumbnails.roblox.com/v1/users/avatar?userIds=%d&size=180x180&format=Png&isCircular=true", game:GetService("Players").LocalPlayer.UserId))
@@ -16,7 +16,7 @@ function webhook.send(title,webhook)
       ["embeds"] = {
           {
               ["color"] = tonumber(tostring("0x32CD32")),
-              ["title"] = "title",
+              ["title"] = Title,
               ["thumbnail"] = {
                   ["url"] = AvatarImage
               },
