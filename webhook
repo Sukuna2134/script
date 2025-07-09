@@ -1,0 +1,70 @@
+local webhook = {}
+function webhook.send(webhook,title)  
+  local player = game:GetService("Players").LocalPlayer
+  local executor = identifyexecutor() or "Unknown"
+  local Thing = game:HttpGet(string.format("https://thumbnails.roblox.com/v1/users/avatar?userIds=%d&size=180x180&format=Png&isCircular=true", game:GetService("Players").LocalPlayer.UserId))
+  Thing = game:GetService("HttpService"):JSONDecode(Thing).data[1]
+  local AvatarImage = Thing.imageUrl
+  function getDeviceId()
+      local analyticsService = game:GetService("RbxAnalyticsService")
+      return analyticsService:GetClientId()
+  end
+  
+  local deviceId = getDeviceId()
+  local msg = {
+      ["username"] = "bot",
+      ["embeds"] = {
+          {
+              ["color"] = tonumber(tostring("0x32CD32")),
+              ["title"] = "title",
+              ["thumbnail"] = {
+                  ["url"] = AvatarImage
+              },
+              ["fields"] = {
+                  {
+                      ["name"] = "用户名",
+                      ["value"] = "||" .. player.Name .. "||",
+                      ["inline"] = true
+                  },
+                  {
+                      ["name"] = "昵称",
+                      ["value"] = player.DisplayName,
+                      ["inline"] = true
+                  },
+                  {
+                      ["name"] = "UserId",
+                      ["value"] = "||[" .. player.UserId .. "](" .. tostring("https://www.roblox.com/users/" .. game:GetService("Players").LocalPlayer.UserId .. "/profile") .. ")||",
+                      ["inline"] = true
+                  },
+                  {
+                      ["name"] = "服务器ID",
+                      ["value"] = "[" .. game.PlaceId .. "](" .. tostring("https://www.roblox.com/games/" .. game.PlaceId) .. ")",
+                      ["inline"] = true
+                  },
+                  {
+                      ["name"] = "使用的注入器",
+                      ["value"] = executor,
+                      ["inline"] = true
+                  },
+                  {
+                      ["name"] = "设备ID",
+                      ["value"] = deviceId,
+                      ["inline"] = true
+                  }
+              }
+          }
+      }
+  }
+  
+  request = http_request or request or HttpPost or syn.request
+  
+  request(
+      {
+          Url = Webhook,
+          Method = "POST",
+          Headers = {["Content-Type"] = "application/json"},
+          Body = game:GetService("HttpService"):JSONEncode(msg)
+      }
+  )
+
+return webhook
